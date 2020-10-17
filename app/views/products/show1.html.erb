@@ -1,0 +1,10 @@
+<h1 class="jumbotron"><%= ::Temple::Utils.escape_html(( @product.name.capitalize )) %></h1>
+<div class="container">
+<div class="card">
+<div class="card-body">
+<p><%= ::Temple::Utils.escape_html((@product.description)) %>
+</p><p><small> SGD </small> <%= ::Temple::Utils.escape_html(( @product.price )) %></p>
+<%= ::Temple::Utils.escape_html((link_to 'Add to Cart', add_to_cart_path(@product), method: :put)) %>
+</div><div class="card-footer">
+<%= ::Temple::Utils.escape_html((link_to 'Back to Product List', products_path)) %>
+</div></div></div>

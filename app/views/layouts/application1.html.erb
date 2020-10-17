@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta<% _slim_codeattributes1 = ("text/html; charset=UTF-8"); if _slim_codeattributes1; if _slim_codeattributes1 == true %> content=""<% else %> content="<%= ::Temple::Utils.escape_html((_slim_codeattributes1)) %>"<% end; end %> http-equiv="Content-Type" />
+<title>ShoppingAppRedo</title>
+<%= ::Temple::Utils.escape_html((csrf_meta_tags)) %>
+
+
+</script><%= ::Temple::Utils.escape_html((stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload')) %>
+<%= ::Temple::Utils.escape_html((javascript_include_tag 'application', 'data-turbolinks-track': 'reload')) %>
+</head><body>
+<div class="navbar">
+<div class="container">
+<div class="navlink"><%= ::Temple::Utils.escape_html((link_to 'Home', products_path)) %>
+</div><% Category.all.each do |category|
+ %><div class="navlink"><%= ::Temple::Utils.escape_html((link_to category.name.capitalize, category_path(category))) %>
+</div><% end; unless user_signed_in?
+ %><div class="navlink"><%= ::Temple::Utils.escape_html((link_to 'Login', new_user_session_path)) %>
+</div><% end; if user_signed_in?
+ %><div class="navlink"><%= ::Temple::Utils.escape_html((link_to 'Cart (' + "#{current_user.cart_count}" + ')', cart_path)) %>
+</div><div class="navlink"><%= ::Temple::Utils.escape_html((link_to 'Logout', destroy_user_session_path)) %>
+</div><% end; if admin_signed_in?
+ %><h4>Admin</h4>
+<div class="navlink"><%= ::Temple::Utils.escape_html((link_to 'Categories', admin_categories_path)) %>
+</div><div class="navlink"><%= ::Temple::Utils.escape_html((link_to 'Products', admin_products_path)) %>
+</div><div class="navlink"><%= ::Temple::Utils.escape_html((link_to 'Orders', admin_orders_path)) %>
+
+</div><% end %></div></div><% flash.each do |name, msg|
+ %><%= ::Temple::Utils.escape_html((content_tag :div, msg, class: name)) %>
+<% end %><%= ::Temple::Utils.escape_html((yield)) %>
+</body></html>
